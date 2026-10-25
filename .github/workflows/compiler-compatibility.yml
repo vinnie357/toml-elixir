@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: jdx/mise-action@v4
-      - run: mix local.hex 2.5.3 --force
+      - run: mix local.hex 2.5.4 --force
       - run: mix local.rebar --force
       - run: mise run audit:setup
       - run: mix deps.get
