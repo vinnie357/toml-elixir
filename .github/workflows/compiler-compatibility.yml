@@ -1,0 +1,17 @@
+name: Compiler compatibility
+
+on:
+  pull_request:
+    branches: ["compat/0.7"]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v4
+      - run: mix deps.get
+      - run: mise run ci

@@ -1,0 +1,7 @@
+[tools]
+erlang = "28.5.0.8"
+elixir = "1.19.6-otp-28"
+
+[tasks.ci]
+description = "Check compiler compatibility without warnings"
+run = ["mix compile --force --warnings-as-errors", "mix test --warnings-as-errors"]
