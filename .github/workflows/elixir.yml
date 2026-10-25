@@ -2,7 +2,9 @@ name: elixir
 
 on:
   push:
+    branches-ignore: ["fix/**", "compat/**"]
   pull_request:
+    branches-ignore: ["compat/**"]
 
 jobs:
   test:

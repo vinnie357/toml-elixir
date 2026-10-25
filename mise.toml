@@ -15,7 +15,7 @@ run = "mix test test/cli_errors_test.exs"
 
 [tasks."audit:setup"]
 description = "Install the pinned standalone advisory checker"
-run = "mix escript.install hex mix_audit 2.1.5 --force"
+run = "elixir scripts/audit-dependencies.exs setup"
 
 [tasks."audit:hex"]
 env = { MIX_ENV = "test" }
@@ -25,4 +25,4 @@ run = "mix hex.audit"
 [tasks."audit:deps"]
 env = { MIX_ENV = "test" }
 description = "Audit the current lock without a production tool dependency"
-run = '"$HOME/.mix/escripts/mix_audit" --path . --format=json'
+run = "elixir scripts/audit-dependencies.exs"
