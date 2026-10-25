@@ -3,6 +3,7 @@ erlang = "28.5.0.8"
 elixir = "1.19.6-otp-28"
 
 [tasks.ci]
+depends = ["audit:hex", "audit:deps"]
 env = { MIX_ENV = "test" }
 description = "Check compiler compatibility without warnings"
 run = ["mix compile --force --warnings-as-errors", "mix test --warnings-as-errors"]
@@ -11,3 +12,17 @@ run = ["mix compile --force --warnings-as-errors", "mix test --warnings-as-error
 description = "Reproduce the unsupported-format CLI failure"
 env = { MIX_ENV = "test" }
 run = "mix test test/cli_errors_test.exs"
+
+[tasks."audit:setup"]
+description = "Install the pinned standalone advisory checker"
+run = "mix escript.install hex mix_audit 2.1.5 --force"
+
+[tasks."audit:hex"]
+env = { MIX_ENV = "test" }
+description = "Check package advisories and retirements with Hex 2.5.3 or newer"
+run = "mix hex.audit"
+
+[tasks."audit:deps"]
+env = { MIX_ENV = "test" }
+description = "Audit the current lock without a production tool dependency"
+run = '"$HOME/.mix/escripts/mix_audit" --path . --format=json'
