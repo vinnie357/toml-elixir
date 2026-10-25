@@ -10,6 +10,8 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      MIX_ENV: test
     steps:
       - uses: actions/checkout@v4
       - uses: jdx/mise-action@v4

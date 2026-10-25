@@ -5,7 +5,7 @@ defmodule Toml.MixProject do
   @source_url "https://github.com/bitwalker/toml-elixir"
 
   def project do
-    [
+    project = [
       app: :toml,
       version: @version,
       elixir: "~> 1.9",
@@ -15,7 +15,23 @@ defmodule Toml.MixProject do
       package: package(),
       deps: deps(),
       aliases: aliases(Mix.env()),
-      preferred_cli_env: [
+      dialyzer: dialyzer(),
+      docs: docs(),
+      elixirc_paths: elixirc_paths(Mix.env()),
+      escript: escript(Mix.env()),
+      test_coverage: [tool: ExCoveralls]
+    ]
+
+    if Version.match?(System.version(), ">= 1.19.0") do
+      project
+    else
+      Keyword.put(project, :preferred_cli_env, cli()[:preferred_envs])
+    end
+  end
+
+  def cli do
+    [
+      preferred_envs: [
         bench: :bench,
         "bench.decoder": :bench,
         "bench.lexer": :bench,
@@ -24,12 +40,7 @@ defmodule Toml.MixProject do
         coveralls: :test,
         "coveralls.html": :test,
         "coveralls.details": :test
-      ],
-      dialyzer: dialyzer(),
-      docs: docs(),
-      elixirc_paths: elixirc_paths(Mix.env()),
-      escript: escript(Mix.env()),
-      test_coverage: [tool: ExCoveralls]
+      ]
     ]
   end
 
