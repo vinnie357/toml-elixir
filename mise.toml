@@ -6,3 +6,8 @@ elixir = "1.19.6-otp-28"
 env = { MIX_ENV = "test" }
 description = "Check compiler compatibility without warnings"
 run = ["mix compile --force --warnings-as-errors", "mix test --warnings-as-errors"]
+
+[tasks."test:cli-errors"]
+description = "Reproduce the unsupported-format CLI failure"
+env = { MIX_ENV = "test" }
+run = "mix test test/cli_errors_test.exs"
