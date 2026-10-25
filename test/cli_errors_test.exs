@@ -14,7 +14,7 @@ defmodule Toml.CliErrorsTest do
           "-pa",
           Mix.Project.compile_path(),
           "-e",
-          ~s(Toml.CLI.main(["convert", "--format", "yaml", "--stdin"]))
+          ~s|Toml.CLI.main(["convert", "--format", "yaml", "--stdin"])|
         ],
         stderr_to_stdout: true
       )
