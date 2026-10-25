@@ -30,7 +30,9 @@ defmodule Toml.CLI do
 
     # Validate format
     unless opts[:format] == "json" do
-      fail!("Invalid conversion format '#{opts[:format]}'. Supported formats are: 'json'.")
+      fail!(
+        {:error, "Invalid conversion format '#{opts[:format]}'. Supported formats are: 'json'."}
+      )
     end
 
     input = input(opts)
@@ -74,7 +76,7 @@ defmodule Toml.CLI do
         System.halt(1)
 
       {:error, {:invalid_toml, reason}} when is_binary(reason) ->
-        fail!(reason)
+        fail!({:error, reason})
     end
   end
 
